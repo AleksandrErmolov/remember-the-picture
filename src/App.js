@@ -1,4 +1,4 @@
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import css from './icon/css.png'
 import html from './icon/html.png'
@@ -42,7 +42,7 @@ function App() {
       array[randomIndex] = temporaryValue
     }
 
-return array
+    return array
   }
 
   useEffect(() => {
@@ -52,7 +52,26 @@ return array
 
   return (
     <div className="App">
-      {console.log({ arrayCards })}
+      <p className="number-of-strokes">Сделано ходов: {moves}</p>
+      <div className="cards">
+        {arrayCards.map((item, index) => {
+          let isFlipped = false;
+          if (openCards.includes(index)) isFlipped = true;
+          if (matched.includes(item.id)) isFlipped = true;
+          return (
+            <div key={index} className={`card ${isFlipped ? 'flipped' : '' }`}>
+              <div className='inner'>
+                <div className='front'>
+                  <img src={item.img} width="100" alt="front-card" />
+                </div>
+                <div>
+                  <img src={question} alt="question-mark"/>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   );
 }
