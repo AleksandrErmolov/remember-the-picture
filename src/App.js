@@ -15,6 +15,7 @@ const initialCards = [
   { id: 2, img: html },
   { id: 3, img: js },
   { id: 4, img: react },
+  { id: 5, img: api },
   { id: 6, img: github },
 ]
 
@@ -49,6 +50,32 @@ function App() {
     setArrayCards(shuffle(pairOfArrayCards))
   }, [])
 
+  const flipCard = (index) => () => {
+    setOpenCards(opened => [...opened, index])
+    setMoves(preMove => preMove + 1)
+  }
+
+  useEffect(() => {
+    if (openCards < 2) return
+    const firstMatched = arrayCards[openCards[0]]
+    const secondMatched = arrayCards[openCards[1]]
+
+    if (secondMatched && firstMatched.id === secondMatched.id) {
+      setMatched([...matched, firstMatched.id])
+    }
+
+    if(openCards.length === 2) setTimeout(() => setOpenCards([]), 1000)
+
+  },[openCards])
+
+
+  const handleGameRestart = () => {
+    setOpenCards([]);
+    setMatched([])
+    setMoves(0)
+    setArrayCards(shuffle(pairOfArrayCards))
+  }
+
 
   return (
     <div className="container">
@@ -59,7 +86,7 @@ function App() {
           if (openCards.includes(index)) isFlipped = true;
           if (matched.includes(item.id)) isFlipped = true;
           return (
-            <div key={index} className={`card ${isFlipped ? 'flipped' : '' }`}>
+            <div onClick={flipCard(index) }key={index} className={`card ${isFlipped ? 'flipped' : '' }`}>
               <div className='inner'>
                 <div className='front'>
                   <img src={item.img} width="100" alt="front-card" />
@@ -72,7 +99,7 @@ function App() {
           )
         })}
       </div>
-      <button className="button-restart">Начать заново </button>
+      <button className="button-restart" onClick={handleGameRestart}>Начать заново </button>
     </div>
   );
 }

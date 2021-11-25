@@ -64,6 +64,22 @@ body {
 
 .card .back:hover,
 .button-restart:hover {
-background: #dba8b1;
-transform: scale(1.02);
+  background: #dba8b1;
+  transform: scale(1.02);
+}
+
+.button-restart {
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #eabd55;
+  transition: 0.3s ease all;
+}
+
+.number-of-strokes {
+  font-size: 20px;
+  font-weight: bold;
 }
