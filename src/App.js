@@ -51,7 +51,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="container">
       <p className="number-of-strokes">Сделано ходов: {moves}</p>
       <div className="cards">
         {arrayCards.map((item, index) => {
@@ -72,6 +72,7 @@ function App() {
           )
         })}
       </div>
+      <button className="button-restart">Начать заново </button>
     </div>
   );
 }
